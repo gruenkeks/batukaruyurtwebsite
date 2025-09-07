@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 export default function Header() {
   const [opacity, setOpacity] = useState(0);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [introDone, setIntroDone] = useState(false);
 
   const scrollToIndex = (index: number) => {
     const swiper: any = (window as any).__yurtSwiper;
@@ -17,21 +18,30 @@ export default function Header() {
   useEffect(() => {
     const onSlide = (e: any) => setActiveIndex(e.detail);
     const onScrollOpacity = () => setOpacity(Math.min(1, window.scrollX / window.innerWidth));
+    const onIntroDone = () => setIntroDone(true);
     window.addEventListener("yurt:slide", onSlide as any);
     window.addEventListener("scroll", onScrollOpacity, { passive: true });
+    window.addEventListener("yurt:intro:done", onIntroDone);
     return () => {
       window.removeEventListener("yurt:slide", onSlide as any);
       window.removeEventListener("scroll", onScrollOpacity as any);
+      window.removeEventListener("yurt:intro:done", onIntroDone as any);
     };
   }, []);
 
   const [activeIndex, setActiveIndex] = useState(0);
 
   return (
-    <header className="pointer-events-none fixed inset-x-0 top-0 z-40 flex items-center justify-between px-8 py-6">
+    <header className="pointer-events-none fixed inset-x-0 top-0 z-40 flex items-center justify-between px-8 py-6"
+      style={{ transform: introDone ? "translateY(0)" : "translateY(0)", transition: "transform 300ms ease" }}
+    >
       <div className="absolute inset-0 -z-10 bg-black/40 backdrop-blur-sm" style={{ opacity }} />
       <div className="pointer-events-auto flex items-center">
-        <Image src="/logo.png" alt="Batukaru Yurt" width={168} height={168} />
+        <div id="logo-anchor" className="relative" style={{ width: 160, height: 160 }}>
+          {introDone && (
+            <Image src="/logo.png" alt="Batukaru Yurt" width={160} height={160} />
+          )}
+        </div>
       </div>
       <nav className="pointer-events-auto hidden md:flex gap-16 text-white/80">
         {[
@@ -108,11 +118,7 @@ export default function Header() {
         </div>
       )}
 
-      {/* Global arrows — visible on all screens */}
-      <div className="pointer-events-auto fixed right-6 top-[58%] z-40 -translate-y-1/2 flex items-center gap-3">
-        <ArrowButton direction="left" />
-        <ArrowButton direction="right" />
-      </div>
+      {/* Arrows removed from header - now in Slides component */}
     </header>
   );
 }

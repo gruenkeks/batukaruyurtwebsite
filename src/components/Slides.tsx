@@ -14,6 +14,7 @@ import "swiper/css/effect-creative";
 export default function Slides() {
   return (
     <div className="h-screen">
+      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 3, ease: [0.16, 1, 0.3, 1] }} className="h-full">
       <Swiper
       modules={[Navigation, Keyboard, Mousewheel, EffectCreative]}
       effect="creative"
@@ -125,12 +126,37 @@ export default function Slides() {
         </Slide>
       </SwiperSlide>
       </Swiper>
+      </motion.div>
       <motion.div
         initial={{ opacity: 1 }}
-        animate={{ opacity: [1, 0.55, 0] }}
-        transition={{ duration: 3, times: [0, 0.0667, 1], ease: ["linear", [0.16, 1, 0.3, 1]] }}
+        animate={{ opacity: 0 }}
+        transition={{ delay: 1, duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
         className="pointer-events-none fixed inset-0 z-50 bg-black"
       />
+      
+      {/* Global arrows — visible on all slides */}
+      <div className="pointer-events-auto fixed right-6 z-40 flex items-center gap-3" style={{ top: "58%" }}>
+        <button
+          onClick={() => {
+            const swiper = (window as any).__yurtSwiper;
+            if (swiper) swiper.slidePrev();
+          }}
+          aria-label="Previous"
+          className="h-16 w-16 rounded-full border border-white/30 text-white/95 text-2xl backdrop-blur-sm hover:bg-white/10 active:scale-[0.98]"
+        >
+          ←
+        </button>
+        <button
+          onClick={() => {
+            const swiper = (window as any).__yurtSwiper;
+            if (swiper) swiper.slideNext();
+          }}
+          aria-label="Next"
+          className="h-16 w-16 rounded-full border border-white/30 text-white/95 text-2xl backdrop-blur-sm hover:bg-white/10 active:scale-[0.98]"
+        >
+          →
+        </button>
+      </div>
     </div>
   );
 }
