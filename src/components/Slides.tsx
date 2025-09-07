@@ -4,6 +4,7 @@ import Hero from "./Hero";
 import Slide from "./Slide";
 import Image from "next/image";
 import NewsletterForm from "./NewsletterForm";
+import { motion } from "framer-motion";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Keyboard, Mousewheel, EffectCreative } from "swiper/modules";
 import "swiper/css";
@@ -12,7 +13,8 @@ import "swiper/css/effect-creative";
 
 export default function Slides() {
   return (
-    <Swiper
+    <div className="h-screen">
+      <Swiper
       modules={[Navigation, Keyboard, Mousewheel, EffectCreative]}
       effect="creative"
       creativeEffect={{ prev: { shadow: false, translate: ["-20%", 0, -1] }, next: { translate: ["100%", 0, 0] } }}
@@ -30,7 +32,7 @@ export default function Slides() {
         window.dispatchEvent(evt);
       }}
       slidesPerView={1}
-      className="h-screen"
+      className="h-full"
     >
       <SwiperSlide>
         <Hero />
@@ -122,7 +124,14 @@ export default function Slides() {
           </div>
         </Slide>
       </SwiperSlide>
-    </Swiper>
+      </Swiper>
+      <motion.div
+        initial={{ opacity: 1 }}
+        animate={{ opacity: [1, 0.55, 0] }}
+        transition={{ duration: 3, times: [0, 0.0667, 1], ease: ["linear", [0.16, 1, 0.3, 1]] }}
+        className="pointer-events-none fixed inset-0 z-50 bg-black"
+      />
+    </div>
   );
 }
 
