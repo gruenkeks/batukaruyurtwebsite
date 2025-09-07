@@ -14,7 +14,7 @@ import "swiper/css/effect-creative";
 
 export default function Slides() {
   const [activeIndex, setActiveIndex] = useState(0);
-  const totalSlides = 6; // Hero + 5 content slides
+  const totalSlides = 4; // Home + Vision + Info + Invest
   const isFirst = activeIndex === 0;
   const isLast = activeIndex === totalSlides - 1;
 
@@ -52,88 +52,58 @@ export default function Slides() {
         <Hero />
       </SwiperSlide>
 
+      {/* Vision */}
       <SwiperSlide>
         <Slide>
           <div className="relative z-10 flex min-h-screen items-center justify-between px-10">
-            <div className="max-w-[680px]">
-              <h2 className="text-5xl md:text-6xl font-medium tracking-tight">Opportunity & Solution</h2>
-              <p className="mt-6 text-white/80 max-w-[640px] leading-7">
-                Bali’s mainstream tourism is saturated. Travelers want privacy, nature, and purpose.
-                We’re creating a single, design-led 8m yurt on Mount Batukaru—an intimate wellness
-                stay with access to sauna, ice bath, and a yoga/meditation shala—positioned for
-                authenticity and long-term appreciation.
+            <div className="max-w-[760px]">
+              <h2 className="text-5xl md:text-6xl font-medium tracking-tight">Vision</h2>
+              <p className="mt-6 text-white/80 leading-7">
+                I am creating a luxurious, eco‑friendly private retreat for wellness enthusiasts —
+                as close to nature as it gets. The sanctuary centers around an 8 m yurt with a loft bed
+                and skylight dome, complemented by a sauna, ice bath, yoga shala and possibly a small gym,
+                plus a fireplace for slow evenings.
               </p>
             </div>
             <div className="hidden md:block">
-              <Image src="https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=1400&auto=format&fit=crop" alt="Misty mountain" width={520} height={360} className="rounded-lg opacity-90 [filter:grayscale(100%)]" />
+              <Image src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1400&auto=format&fit=crop" alt="Organic grayscale form" width={520} height={360} className="rounded-lg opacity-90 [filter:grayscale(100%)]" />
             </div>
           </div>
         </Slide>
       </SwiperSlide>
 
+      {/* Info */}
       <SwiperSlide>
         <Slide>
           <div className="relative z-10 flex min-h-screen items-center justify-between px-10">
-            <div className="max-w-[680px]">
-              <h2 className="text-5xl md:text-6xl font-medium tracking-tight">Location: Mount Batukaru</h2>
-              <p className="mt-6 text-white/80 max-w-[640px] leading-7">
-                Sacred forest reserve, cool climate, and profound tranquility at the end of a
-                quiet mountain road—adjacent to a major temple and immersed in an organic garden.
-              </p>
-            </div>
-            <div className="hidden md:block">
-              <Image src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=1400&auto=format&fit=crop" alt="Bali landscape" width={520} height={360} className="rounded-lg opacity-90 [filter:grayscale(100%)]" />
-            </div>
-          </div>
-        </Slide>
-      </SwiperSlide>
-
-      <SwiperSlide>
-        <Slide>
-          <div className="relative z-10 flex min-h-screen items-center justify-between px-10">
-            <div className="max-w-[680px]">
-              <h2 className="text-5xl md:text-6xl font-medium tracking-tight">Partnership & Design</h2>
-              <p className="mt-6 text-white/80 max-w-[640px] leading-7">
-                De-risked by a proven on-site partner: existing utilities, staff, and hospitality
-                know-how. The yurt is sustainably built—bamboo structure, custom Indonesian canvas,
-                and a geodesic skylight—for a minimal, timeless interior.
-              </p>
+            <div className="max-w-[760px]">
+              <h2 className="text-5xl md:text-6xl font-medium tracking-tight">Info</h2>
+              <ul className="mt-6 space-y-3 text-white/85 leading-7 list-disc pl-5">
+                <li>Cooler mountain climate than the cities; profound tranquility at the end of the road.</li>
+                <li>Pure spring water on site.</li>
+                <li>Yurt placed within a lush garden: avocado, coffee, pineapple, banana, chamomile, pumpkin, jackfruit, coconuts, berries and more.</li>
+                <li>Partnering with landowner Pusman — builder of 2 cabins on the land; he sources local materials and labour.</li>
+                <li>Pusman receives 25% of profits for land use — aligned incentives for quality and cost.</li>
+                <li>Nearby gems: “Fait Maison” boutique cafe/restaurant (5‑minute walk) and a major temple at the end of the mountain road.</li>
+                <li>On clear days, distant views down to the cities — as far as Kuta.</li>
+              </ul>
             </div>
           </div>
         </Slide>
       </SwiperSlide>
 
+      {/* Invest */}
       <SwiperSlide>
         <Slide>
           <div className="relative z-10 flex min-h-screen items-center justify-between px-10">
-            <div className="max-w-[680px]">
-              <h2 className="text-5xl md:text-6xl font-medium tracking-tight">Financials & Investment</h2>
-              <p className="mt-6 text-white/80 max-w-[640px] leading-7">
-                $120–$180/night target, ~70% occupancy → ~US$38k projected gross per year. Seeking
-                US$25–30k to build. Structure: 100% of net profits to investor until payback, then
-                10–25% perpetual share plus annual owner nights. Timeline: Month 1 funding &
-                permits; Month 2 build; Month 3 interiors/landscaping; Month 4 launch.
-              </p>
-            </div>
-          </div>
-        </Slide>
-      </SwiperSlide>
-
-      <SwiperSlide>
-        <Slide>
-          <div className="relative z-10 flex min-h-screen items-center justify-between px-10">
-            <div className="max-w-[680px]">
-              <h2 className="text-5xl md:text-6xl font-medium tracking-tight">Team & Contact</h2>
-              <p className="mt-6 text-white/80 max-w-[640px] leading-7">
-                Led by a hands-on founder with a trusted local operator. Purpose-driven,
-                detail-obsessed, and committed to sustainability. Reach out for the detailed model
-                and site photos.
+            <div className="max-w-[760px]">
+              <h2 className="text-5xl md:text-6xl font-medium tracking-tight">Invest</h2>
+              <p className="mt-6 text-white/80 leading-7">
+                Investors receive <strong className="text-white">100% of net profits until the initial investment is recouped</strong>.
+                After payback, investors receive an ongoing profit share plus a set number of free stays per year.
               </p>
               <a href="mailto:dennis@batukaruyurt.com" className="mt-8 inline-flex items-center justify-center rounded-full border border-white/20 px-6 py-3 text-sm text-white/90 hover:bg-white/10">dennis@batukaruyurt.com</a>
-            </div>
-            {/* Newsletter bottom-right overlay */}
-            <div className="absolute bottom-6 right-6 w-[320px] max-w-[80vw]">
-              <NewsletterForm compact showText />
+              <div className="mt-6 max-w-[520px]"><NewsletterForm compact showText /></div>
             </div>
           </div>
         </Slide>
