@@ -5,6 +5,7 @@ import Slide from "./Slide";
 import Image from "next/image";
 import NewsletterForm from "./NewsletterForm";
 import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Keyboard, Mousewheel, EffectCreative } from "swiper/modules";
 import "swiper/css";
@@ -12,6 +13,16 @@ import "swiper/css/navigation";
 import "swiper/css/effect-creative";
 
 export default function Slides() {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const totalSlides = 6; // Hero + 5 content slides
+  const isFirst = activeIndex === 0;
+  const isLast = activeIndex === totalSlides - 1;
+
+  useEffect(() => {
+    const onSlide = (e: any) => setActiveIndex(e.detail as number);
+    window.addEventListener("yurt:slide", onSlide as any);
+    return () => window.removeEventListener("yurt:slide", onSlide as any);
+  }, []);
   return (
     <div className="h-screen">
       <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 3, ease: [0.16, 1, 0.3, 1] }} className="h-full">
@@ -27,10 +38,12 @@ export default function Slides() {
         (window as any).__yurtSwiper = swiper;
         const evt = new CustomEvent("yurt:slide", { detail: swiper.activeIndex });
         window.dispatchEvent(evt);
+        setActiveIndex(swiper.activeIndex);
       }}
       onSlideChange={(swiper) => {
         const evt = new CustomEvent("yurt:slide", { detail: swiper.activeIndex });
         window.dispatchEvent(evt);
+        setActiveIndex(swiper.activeIndex);
       }}
       slidesPerView={1}
       className="h-full"
@@ -116,7 +129,7 @@ export default function Slides() {
                 detail-obsessed, and committed to sustainability. Reach out for the detailed model
                 and site photos.
               </p>
-              <a href="mailto:invest@batukaruyurt.com" className="mt-8 inline-flex items-center justify-center rounded-full border border-white/20 px-6 py-3 text-sm text-white/90 hover:bg-white/10">invest@batukaruyurt.com</a>
+              <a href="mailto:dennis@batukaruyurt.com" className="mt-8 inline-flex items-center justify-center rounded-full border border-white/20 px-6 py-3 text-sm text-white/90 hover:bg-white/10">dennis@batukaruyurt.com</a>
             </div>
             {/* Newsletter bottom-right overlay */}
             <div className="absolute bottom-6 right-6 w-[320px] max-w-[80vw]">
@@ -134,29 +147,64 @@ export default function Slides() {
         className="pointer-events-none fixed inset-0 z-50 bg-black"
       />
       
-      {/* Global arrows — visible on all slides */}
-      <div className="pointer-events-auto fixed right-6 z-40 flex items-center gap-3" style={{ top: "58%" }}>
-        <button
-          onClick={() => {
-            const swiper = (window as any).__yurtSwiper;
-            if (swiper) swiper.slidePrev();
-          }}
-          aria-label="Previous"
-          className="h-16 w-16 rounded-full border border-white/30 text-white/95 text-2xl backdrop-blur-sm hover:bg-white/10 active:scale-[0.98]"
-        >
-          ←
-        </button>
-        <button
-          onClick={() => {
-            const swiper = (window as any).__yurtSwiper;
-            if (swiper) swiper.slideNext();
-          }}
-          aria-label="Next"
-          className="h-16 w-16 rounded-full border border-white/30 text-white/95 text-2xl backdrop-blur-sm hover:bg-white/10 active:scale-[0.98]"
-        >
-          →
-        </button>
+      {/* Global arrows: visibility rules */}
+      {/* Desktop: both on the right (except first/last constraints) */}
+      <div className="pointer-events-auto fixed right-6 z-40 hidden md:flex items-center gap-3" style={{ top: "58%" }}>
+        {!isFirst && (
+          <button
+            onClick={() => {
+              const swiper = (window as any).__yurtSwiper;
+              if (swiper) swiper.slidePrev();
+            }}
+            aria-label="Previous"
+            className="h-16 w-16 rounded-full border border-white/30 text-white/95 text-2xl backdrop-blur-sm hover:bg-white/10 active:scale-[0.98]"
+          >
+            ←
+          </button>
+        )}
+        {!isLast && (
+          <button
+            onClick={() => {
+              const swiper = (window as any).__yurtSwiper;
+              if (swiper) swiper.slideNext();
+            }}
+            aria-label="Next"
+            className="h-16 w-16 rounded-full border border-white/30 text-white/95 text-2xl backdrop-blur-sm hover:bg-white/10 active:scale-[0.98]"
+          >
+            →
+          </button>
+        )}
       </div>
+
+      {/* Mobile: split arrows left/right; show based on first/last */}
+      {!isFirst && (
+        <div className="pointer-events-auto fixed z-40 md:hidden" style={{ top: "58%", left: "max(env(safe-area-inset-left), 24px)" }}>
+          <button
+            onClick={() => {
+              const swiper = (window as any).__yurtSwiper;
+              if (swiper) swiper.slidePrev();
+            }}
+            aria-label="Previous"
+            className="h-14 w-14 rounded-full border border-white/30 text-white/95 text-2xl backdrop-blur-sm hover:bg-white/10 active:scale-[0.98]"
+          >
+            ←
+          </button>
+        </div>
+      )}
+      {!isLast && (
+        <div className="pointer-events-auto fixed right-6 z-40 md:hidden" style={{ top: "58%" }}>
+          <button
+            onClick={() => {
+              const swiper = (window as any).__yurtSwiper;
+              if (swiper) swiper.slideNext();
+            }}
+            aria-label="Next"
+            className="h-14 w-14 rounded-full border border-white/30 text-white/95 text-2xl backdrop-blur-sm hover:bg-white/10 active:scale-[0.98]"
+          >
+            →
+          </button>
+        </div>
+      )}
     </div>
   );
 }
