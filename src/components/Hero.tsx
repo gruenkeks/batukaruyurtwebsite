@@ -87,8 +87,8 @@ export default function Hero() {
         <div className="h-[14px] rounded-sm bg-gradient-to-r from-teal-400 via-amber-300 to-orange-500" />
       </div>
 
-      {/* Newsletter bottom-right */}
-      <div className="absolute bottom-6 right-6 z-30 w-[320px] max-w-[80vw]">
+      {/* Newsletter bottom-right (hidden on mobile) */}
+      <div className="absolute bottom-6 right-6 z-30 w-[320px] max-w-[80vw] hidden md:block">
         <NewsletterForm compact showText />
       </div>
     </section>
