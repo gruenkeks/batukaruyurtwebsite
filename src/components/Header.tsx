@@ -46,11 +46,9 @@ export default function Header() {
       <nav className="pointer-events-auto hidden md:flex gap-16 text-white/80">
         {[
           { label: "Home", i: 0 },
-          { label: "Opportunity", i: 1 },
-          { label: "Location", i: 2 },
-          { label: "Partnership", i: 3 },
-          { label: "Financials", i: 4 },
-          { label: "Team", i: 5 },
+          { label: "Vision", i: 1 },
+          { label: "Info", i: 2 },
+          { label: "Invest", i: 3 },
         ].map((item) => {
           const isActive = item.i === activeIndex;
           return (
@@ -91,11 +89,9 @@ export default function Header() {
           <ul className="flex flex-col divide-y divide-white/10">
             {[
               { label: "Home", i: 0 },
-              { label: "Opportunity", i: 1 },
-              { label: "Location", i: 2 },
-              { label: "Partnership", i: 3 },
-              { label: "Financials", i: 4 },
-              { label: "Team", i: 5 },
+              { label: "Vision", i: 1 },
+              { label: "Info", i: 2 },
+              { label: "Invest", i: 3 },
             ].map((item) => {
               const isActive = item.i === activeIndex;
               return (
